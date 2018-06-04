@@ -1,0 +1,148 @@
+All stuff is from ToshibaAVRemote app.
+
+How to get password:
+
+1: Pulling from ToshibaAppsDB
+1) Open ToshibaAVRemote app
+2) Pair with TV (enter pin, etc.)
+3) Close app
+4) Go with an root file manager to *long time ago when i did this*/rdhosts.db
+5) Open with an db editor
+6) pull username and password
+
+2: Normal way (havent reversed it completly)
+1) Make post request without http auth to /v2/public/request_connection with user_id: mac address
+2) TV shows pin overlay, the request should return status: 0, nonce and password
+3) do some magic with nonce password and pin
+4) make post request to /v2/remote/confirm_connection
+
+
+*** AUTH ***
+POST: /v2/public/cancel_connection
+POST: /v2/remote/confirm_connection
+POST: /v2/public/request_connection (user_id: [mac address])
+
+*** IR BLASTER ***
+Dont need it because my tv doesnt have this.
+
+*** WEB BROWSER ***
+Didnt work when i tested it (404), maybe browser needs to be started?
+GET: /v2/remote/browser/url
+POST: /v2/remote/browser/url (url: your url string, power_on: true)
+POST: /v2/remote/browser/zoom (step_zoom: integer [zoom in %?])
+
+*** VOLUME ***
+GET: /v2/remote/status/volume
+POST: /v2/remote/status/volume (volume: volume integer 0-100)
+GET: /v2/remote/status/mute
+POST: /v2/remote/status/mute (mute: true/false)
+
+*** POWER ***
+GET: /v2/remote/status/power
+POST: /v2/remote/status/power (power: on/off)
+
+*** KEYS ***
+POST: /v2/remote/remote (key: string from keys list)
+
+*** INPUTS ***
+GET: /v2/remote/status/external_input
+POST: /v2/remote/status/external_input (external_input: ???)
+GET: /v2/remote/peripheral/input_list
+
+*** CHANNELS ***
+GET: /v2/remote/settings/channel_list
+GET: /v2/remote/status/channel
+POST: /v2/remote/status/channel (channel: ???)
+
+*** ETC ***
+GET: /public/feature
+GET: /v2/remote/settings/locale
+GET: /public/support?resource=&http_method=&params=
+POST: /v2/remote/ + string [For some type of mouse control]
+POST: /v2/remote/text_box (concat: string or control_code: string *DIDNT WORK ON MY TV*)
+
+### Key List (from DefDeviceTv)###
+
+     KEYCODE_TV_0 = 4243200;
+     KEYCODE_TV_1 = 4243201;
+     KEYCODE_TV_2 = 4243202;
+     KEYCODE_TV_3 = 4243203;
+     KEYCODE_TV_3D = 4243011;
+     KEYCODE_TV_4 = 4243204;
+     KEYCODE_TV_5 = 4243205;
+     KEYCODE_TV_6 = 4243206;
+     KEYCODE_TV_7 = 4243207;
+     KEYCODE_TV_8 = 4243208;
+     KEYCODE_TV_9 = 4243209;
+     KEYCODE_TV_APPS = 4242985;
+     KEYCODE_TV_BACK = 4243417;
+     KEYCODE_TV_BACKWARD = 4243255;
+     KEYCODE_TV_BLUE = 4243318;
+     KEYCODE_TV_BROWSER_BACK = 4243252;
+     KEYCODE_TV_BROWSER_CURSOR_DOWN = 4243331;
+     KEYCODE_TV_BROWSER_CURSOR_LEFT = 4243229;
+     KEYCODE_TV_BROWSER_CURSOR_MODE = 4243316;
+     KEYCODE_TV_BROWSER_CURSOR_OK = 4243337;
+     KEYCODE_TV_BROWSER_CURSOR_RIGHT = 4243225;
+     KEYCODE_TV_BROWSER_CURSOR_UP = 4243330;
+     KEYCODE_TV_BROWSER_EXIT = 4243288;
+     KEYCODE_TV_BROWSER_FAVORITE = 4243256;
+     KEYCODE_TV_BROWSER_FORWARD = 4243251;
+     KEYCODE_TV_BROWSER_RELOARD = 4243248;
+     KEYCODE_TV_BROWSER_RETURN = 4243417;
+     KEYCODE_TV_BROWSER_SEARCH = 4242981;
+     KEYCODE_TV_BROWSER_STOP = 4243249;
+     KEYCODE_TV_BROWSER_TOOLBAR = 4243318;
+     KEYCODE_TV_BROWSER_WINDOW_LIST = 4243317;
+     KEYCODE_TV_BROWSER_ZOOM_IN = 4243227;
+     KEYCODE_TV_BROWSER_ZOOM_OUT = 4243231;
+     KEYCODE_TV_CC = 4243287;
+     KEYCODE_TV_CH_DOWN = 4243231;
+     KEYCODE_TV_CH_RTN = 4243223;
+     KEYCODE_TV_CH_UP = 4243227;
+     KEYCODE_TV_DOT = 4243210;
+     KEYCODE_TV_DOWN = 4243331;
+     KEYCODE_TV_EMANUAL = 4242983;
+     KEYCODE_TV_EXIT = 4243288;
+     KEYCODE_TV_FAST_FORWARD = 4243251;
+     KEYCODE_TV_FORWARD = 4243254;
+     KEYCODE_TV_FREEZE = 4243276;
+     KEYCODE_TV_GAME = 4243026;
+     KEYCODE_TV_GREEN = 4243316;
+     KEYCODE_TV_INFO = 4243332;
+     KEYCODE_TV_INPUT = 4243215;
+     KEYCODE_TV_INTERNET = 4242984;
+     KEYCODE_TV_LEFT = 4243229;
+     KEYCODE_TV_MENU = 4243328;
+     KEYCODE_TV_MTS = 4243219;
+     KEYCODE_TV_MUTE = 4243216;
+     KEYCODE_TV_MUTE_HALF = 4243074;
+     KEYCODE_TV_MUTE_OFF = 4243073;
+     KEYCODE_TV_MUTE_ON = 4243072;
+     KEYCODE_TV_NET_NETFLIX = 4242986;
+     KEYCODE_TV_NET_YWIDGETS = 4243423;
+     KEYCODE_TV_OK = 4243337;
+     KEYCODE_TV_PAGE_DOWN = 4242977;
+     KEYCODE_TV_PAGE_LEFT = 4242978;
+     KEYCODE_TV_PAGE_RIGHT = 4242979;
+     KEYCODE_TV_PAGE_UP = 4242976;
+     KEYCODE_TV_PAUSE = 4243253;
+     KEYCODE_TV_PIC_MODE = 4243245;
+     KEYCODE_TV_PIC_SIZE = 4243284;
+     KEYCODE_TV_PLAY = 4243248;
+     KEYCODE_TV_PORTAL = 4242980;
+     KEYCODE_TV_POWER = 4243218;
+     KEYCODE_TV_QUICK = 4243411;
+     KEYCODE_TV_REC = 4243256;
+     KEYCODE_TV_RED = 4243315;
+     KEYCODE_TV_RETURN = 4243417;
+     KEYCODE_TV_REW = 4243252;
+     KEYCODE_TV_RIGHT = 4243225;
+     KEYCODE_TV_SEARCH = 4242981;
+     KEYCODE_TV_SLEEP = 4243221;
+     KEYCODE_TV_STOP = 4243249;
+     KEYCODE_TV_TOTAL_GUIDE = 4242982;
+     KEYCODE_TV_UP = 4243330;
+     KEYCODE_TV_VOL_DOWN = 4243230;
+     KEYCODE_TV_VOL_UP = 4243226;
+     KEYCODE_TV_YELLOW = 4243317;
